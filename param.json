@@ -1,0 +1,103 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "department": {
+      "value": "finance"
+    },
+    "saAccountCount": {
+      "value": 1
+    },
+    "vmCount": {
+      "value": 1
+    },
+    "locationIndex": { //idenx 1 = app server, 2=AD, 3=Tool server, 4= dchp server
+      "value": 1
+    },
+    "appRoleIndex": { //idenx 1 = westus2, 2= westus, 3= eastus, 4=centralus, 5=uswest3
+      "value": 1
+    },
+
+    "appRole": {
+      "value": {
+        "Applicatoin Server": "ap",
+        "Active Directory": "dc",
+        "Tool server": "tool",
+        "DHCP server": "dhcp"
+      }
+    },
+    "environment": {
+      "value": "staging"
+    },
+    "addressPrefixes": {
+      "value": [
+        "10.10.0.0/20"
+      ]
+    },
+    "dnsServers": {
+      "value": [
+        "1.1.1.1",
+        "4.4.4.4"
+      ]
+    },
+    "locationList": {
+      "value": {
+        "westus2": "azw2",
+        "westus": "azw",
+        "Eastus": "aze",
+        "CentralUS": "azc",
+        "westus3": "azw3"
+      }
+    },
+    "subnets": {
+      "value": [
+        {
+          "name": "frontend",
+          "subnetPrefix": "10.10.2.0/24",
+          "delegation": "Microsoft.Web/serverfarms",
+          "privateEndpointNetworkPolicies": "disabled",
+          "serviceEndpoints": [
+            {
+              "service": "Microsoft.KeyVault",
+              "locations": [
+                "*"
+              ]
+            },
+            {
+              "service": "Microsoft.Web",
+              "locations": [
+                "*"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "backend",
+          "subnetPrefix": "10.10.3.0/24",
+          "delegation": "Microsoft.Web/serverfarms",
+          "privateEndpointNetworkPolicies": "enabled",
+          "serviceEndpoints": [
+            {
+              "service": "Microsoft.KeyVault",
+              "locations": [
+                "*"
+              ]
+            },
+            {
+              "service": "Microsoft.Web",
+              "locations": [
+                "*"
+              ]
+            },
+            {
+              "service": "Microsoft.AzureCosmosDB",
+              "locations": [
+                "*"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}        

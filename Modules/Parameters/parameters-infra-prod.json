@@ -1,0 +1,118 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "department": {
+      "value": "IT"
+    },
+ /*  "parPcLawSolutions": {
+    "value": [
+null
+    ]
+   },*/
+  "appRoleIndex": { 
+    "value":  3
+  },
+  "saAccountCounts": {
+    "value": [
+      1
+    ]
+  },
+    "appRole": {
+      "value": [
+          {
+        "Name": "Applicatoin Server",
+        "Shortname": "ap"
+      },
+      {
+      "Name": "Active Directory",
+        "Shortname": "dc"
+  },
+  {
+      "Name": "Tool server",
+      "Shortname": "tool"
+  },
+  {
+       "Name": "dhcp server",
+       "Shortname": "dhcp"
+    }
+  ]
+  },
+    "env": {
+      "value": "dev"
+            },
+  "addressPrefixes": {
+      "value": [
+        "10.10.0.0/20"
+      ]
+    },
+  
+    "locationList": {
+      "value":{
+          "westus2": "azw2",
+          "eastus": "aze"
+      }
+    },
+  
+   "dnsServers": {
+      "value": [
+        "1.1.1.1",
+        "4.4.4.4"
+      ]
+    },
+    
+ "subnets": {
+      "value":[
+              {
+          "name": "frontend",
+          "subnetPrefix": "10.10.2.0/24",
+          "delegation": "Microsoft.Web/serverfarms",
+          "privateEndpointNetworkPolicies": "disabled",
+          "serviceEndpoints":[
+            {
+              "service": "Microsoft.KeyVault",
+              "locations":[
+                "*"
+              ]
+            },
+            {
+              "service": "Microsoft.Web",
+              "locations":[
+                "*"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "backend",
+          "subnetPrefix": "10.10.3.0/24",
+          "delegation": "Microsoft.Web/serverfarms",
+          "privateEndpointNetworkPolicies": "enabled", 
+          "privateLinkServiceNetworkPolicies": "enabled",
+          "serviceEndpointPolicies": "enabled",
+          "serviceEndpoints":[
+            {
+              "service": "Microsoft.KeyVault",
+              "locations":[
+                "*"
+              ]
+            },
+            {
+              "service": "Microsoft.Web",
+              "locations":[
+                "*"
+              ]
+            },
+            {
+              "service": "Microsoft.AzureCosmosDB",
+              "locations":[
+                "*"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+
